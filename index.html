@@ -39,7 +39,10 @@
   .brand-pair{display:flex;align-items:center;gap:12px}
   .brand-pair .x{color:var(--muted-2);font-size:15px;line-height:1}
   .brand-pair .x-dark{color:rgba(255,255,255,.4)}
-  .brand-pair .lushin{height:25px;width:auto;display:block}
+  .brand-lushin{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.03em}
+  .brand-lushin .dot{width:8px;height:8px;background:#1B4A7E;border-radius:2px;transform:rotate(45deg)}
+  footer .brand-lushin{color:#fff}
+  footer .brand-lushin .dot{background:#5B8FC7}
   .nav-links{display:flex;align-items:center;gap:26px}
   .nav-links a{font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--muted);transition:color .14s ease}
   .nav-links a:hover{color:var(--orange)}
@@ -128,7 +131,7 @@
     <span class="brand-pair">
       <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
       <span class="x">&times;</span>
-      <img class="lushin" src="assets/lushin-logo-color.png" alt="Lushin">
+      <span class="brand-lushin"><span class="dot"></span>LUSHIN</span>
     </span>
     <span class="nav-links">
       <a href="#">Home</a>
@@ -206,7 +209,7 @@
     <span class="brand-pair">
       <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
       <span class="x x-dark">&times;</span>
-      <img class="lushin" src="assets/lushin-logo-white.png" alt="Lushin">
+      <span class="brand-lushin"><span class="dot"></span>LUSHIN</span>
     </span>
   </div>
 </footer>
