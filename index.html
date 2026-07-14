@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hypesonic — Sales Playbook</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <meta name="description" content="Working sessions and tools from Hypesonic's sales coaching with Dan Faber, Lushin.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +36,10 @@
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
   .brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.03em}
   .brand .dot{width:8px;height:8px;background:var(--orange);border-radius:2px;transform:rotate(45deg)}
+  .brand-pair{display:flex;align-items:center;gap:12px}
+  .brand-pair .x{color:var(--muted-2);font-size:15px;line-height:1}
+  .brand-pair .x-dark{color:rgba(255,255,255,.4)}
+  .brand-pair .lushin{height:17px;width:auto;display:block}
   .nav .with{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
   /* hero */
@@ -74,12 +79,12 @@
   .card.next .title{color:var(--muted)}
 
   /* tool grid */
-  .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-  .tool{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;display:flex;flex-direction:column;gap:6px}
-  .tool:hover{transform:translateY(-2px);border-color:var(--orange);box-shadow:0 18px 40px -30px rgba(255,74,28,.45)}
-  .tool .kind{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
-  .tool .title{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.01em}
-  .tool .summary{font-size:13.5px;color:var(--muted);flex:1}
+  .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  .tool{border:1px solid var(--line);border-radius:18px;padding:28px;min-height:170px;background:#fff;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+  .tool:hover{transform:translateY(-3px);border-color:var(--orange);box-shadow:0 22px 44px -30px rgba(255,74,28,.45)}
+  .tool .icon{width:46px;height:46px;border-radius:12px;background:var(--orange-wash);color:var(--orange-ink);display:flex;align-items:center;justify-content:center}
+  .tool .icon svg{width:24px;height:24px}
+  .tool .title{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.015em}
 
   /* hub tiles */
   .hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;padding-top:8px}
@@ -118,8 +123,12 @@
 
 <nav class="nav">
   <div class="wrap nav-in">
-    <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
-    <span class="with">Coaching w/ Dan Faber · Lushin</span>
+    <span class="brand-pair">
+      <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
+      <span class="x">&times;</span>
+      <img class="lushin" src="assets/lushin-logo-color.png" alt="Lushin">
+    </span>
+    <span class="with">Coaching w/ Dan Faber</span>
   </div>
 </nav>
 
@@ -187,8 +196,12 @@
 
 <footer>
   <div class="wrap foot-in">
-    <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
-    <span class="tag">Dan Faber · Lushin · <a class="mail" href="mailto:dan@lushin.com">dan@lushin.com</a></span>
+    <span class="brand-pair">
+      <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
+      <span class="x x-dark">&times;</span>
+      <img class="lushin" src="assets/lushin-logo-white.png" alt="Lushin">
+    </span>
+    <span class="tag">Dan Faber · <a class="mail" href="mailto:dan@lushin.com">dan@lushin.com</a></span>
   </div>
 </footer>
 
@@ -206,16 +219,22 @@ var SESSIONS = [
 ];
 
 var ASSETS = [
-  { kind: 'Interactive', title: 'AI Ad Platform Comparison',
+  { icon: 'compare', title: 'AI Ad Platform Comparison',
     href: 'tools/comparison.html' }
 ];
 
 var TOOLS = [
-  { kind: 'Spreadsheet', title: 'Behavior Cookbook',
+  { icon: 'sheet', title: 'Behavior Cookbook',
     href: 'sessions/2026-07-13/Ananya_Cookbook.xlsx' },
-  { kind: 'Spreadsheet', title: 'ZoomInfo Prospect List',
+  { icon: 'list', title: 'ZoomInfo Prospect List',
     href: 'sessions/2026-07-13/Ananya_ZoomInfo_List_July2026.xlsx' }
 ];
+
+var ICONS = {
+  sheet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14h18M9 9v11M15 9v11"/></svg>',
+  list: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M4 19c.6-3 2.6-4.6 5-4.6s4.4 1.6 5 4.6"/><path d="M16.5 8.5h4M16.5 12.5h4M16.5 16.5h4"/></svg>',
+  compare: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><rect x="3" y="7" width="6" height="10" rx="1.5"/><rect x="15" y="5" width="6" height="14" rx="1.5"/></svg>'
+};
 
 (function(){
   var wrap = document.getElementById('sessionCards');
@@ -234,7 +253,7 @@ var TOOLS = [
     var out = '';
     items.forEach(function(t){
       out += '<a class="tool" href="'+t.href+'">'
-           + '<span class="kind">'+t.kind+'</span>'
+           + '<span class="icon">'+ICONS[t.icon]+'</span>'
            + '<span class="title">'+t.title+'</span></a>';
     });
     document.getElementById(id).innerHTML = out;
