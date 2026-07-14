@@ -38,7 +38,7 @@
   .nav .with{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
   /* hero */
-  .hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+  .hero{padding:72px 0 8px}
   .eyebrow{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
   .eyebrow::before{content:"";width:14px;height:1px;background:var(--orange)}
   h1{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4.5vw,44px);letter-spacing:-.03em;line-height:1.04}
@@ -81,6 +81,24 @@
   .tool .title{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.01em}
   .tool .summary{font-size:13.5px;color:var(--muted);flex:1}
 
+  /* hub tiles */
+  .hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;padding-top:8px}
+  .hub-tile{display:flex;flex-direction:column;justify-content:space-between;min-height:190px;border:none;border-radius:20px;padding:30px 30px 26px;color:#fff;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+  .hub-tile:hover{transform:translateY(-3px);filter:brightness(1.06)}
+  .hub-tile .hub-title{font-family:var(--font-display);font-weight:800;font-size:27px;letter-spacing:-.02em}
+  .hub-tile .arrow{align-self:flex-end;font-family:var(--font-display);font-weight:800;font-size:24px;color:rgba(255,255,255,.9);transition:transform .16s ease}
+  .hub-tile:hover .arrow{transform:translateX(5px)}
+  .hub-tile.t-sessions{background:linear-gradient(135deg,#FF4A1C 0%,#E23B0F 100%);box-shadow:0 22px 44px -26px rgba(255,74,28,.55)}
+  .hub-tile.t-tools{background:linear-gradient(135deg,#1E2027 0%,#0F0F10 100%);box-shadow:0 22px 44px -26px rgba(15,15,16,.55)}
+  .hub-tile.t-assets{background:linear-gradient(135deg,#27384E 0%,#1B2838 100%);box-shadow:0 22px 44px -26px rgba(30,42,58,.55)}
+
+  /* view routing */
+  .view{display:none}
+  .back{display:inline-block;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--muted);margin-bottom:18px}
+  .back:hover{color:var(--orange)}
+  body.at-section #view-home{display:none}
+  body.at-section .hero .star{display:none}
+
   footer{margin-top:72px;background:var(--ink-2);color:#fff;padding:40px 0}
   .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
   footer .brand{color:#fff}
@@ -108,14 +126,13 @@
 <main>
   <header class="wrap hero">
     <span class="eyebrow">Sales Playbook</span>
-    <h1>Everything from our sessions,<br>in one place.</h1>
-    <p>Each working session becomes a page here — the frameworks, the numbers, the tools. Open the latest one, do the work, come back with results.</p>
+    <h1>Ananya Sales Playbook</h1>
 
     <div class="star">
       <div class="cell">
         <div class="k">The goal</div>
         <div class="v orange">$1M ARR</div>
-        <div class="sub">$84K MRR · by mid-October</div>
+        <div class="sub">$84K MRR</div>
       </div>
       <div class="cell">
         <div class="k">Starting from</div>
@@ -130,19 +147,41 @@
     </div>
   </header>
 
-  <section class="wrap">
-    <div class="sec-head">
-      <h2>Sessions</h2>
-      <span class="note" id="sessionCount"></span>
+  <!-- HOME: three sections she clicks into -->
+  <section class="wrap" id="view-home">
+    <div class="hub">
+      <a class="hub-tile t-sessions" href="#sessions">
+        <span class="hub-title">Sessions</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="hub-tile t-tools" href="#tools">
+        <span class="hub-title">Tools</span>
+        <span class="arrow">&rarr;</span>
+      </a>
+      <a class="hub-tile t-assets" href="#assets">
+        <span class="hub-title">Assets</span>
+        <span class="arrow">&rarr;</span>
+      </a>
     </div>
+  </section>
+
+  <!-- SECTION VIEWS -->
+  <section class="wrap view" id="view-sessions">
+    <a class="back" href="#">&larr; Playbook</a>
+    <div class="sec-head"><h2>Sessions</h2></div>
     <div class="cards" id="sessionCards"></div>
   </section>
 
-  <section class="wrap">
-    <div class="sec-head">
-      <h2>Tools</h2>
-    </div>
+  <section class="wrap view" id="view-tools">
+    <a class="back" href="#">&larr; Playbook</a>
+    <div class="sec-head"><h2>Tools</h2></div>
     <div class="tools" id="toolCards"></div>
+  </section>
+
+  <section class="wrap view" id="view-assets">
+    <a class="back" href="#">&larr; Playbook</a>
+    <div class="sec-head"><h2>Assets</h2></div>
+    <div class="tools" id="assetCards"></div>
   </section>
 </main>
 
@@ -156,27 +195,25 @@
 <script>
 /* ============================================================
    TO ADD A NEW SESSION:
-   1. Make a new folder: sessions/YYYY-MM-DD/ with an index.html
+   1. Make a new folder inside sessions/ with an index.html
       (and any files it links to) inside it.
-   2. Add ONE line to the top of the SESSIONS list below.
+   2. Add ONE line to the top of the SESSIONS list below (title + href).
    That's it — the page renders the rest.
    ============================================================ */
 var SESSIONS = [
-  { date: 'Jul 13, 2026',
-    title: 'The Plan — Growing Sales to $84K MRR',
-    summary: 'The math to $1M ARR, the three things in order, your talk track, and the Behavior Cookbook.',
+  { title: 'The Plan — Growing Sales to $84K MRR',
     href: 'sessions/2026-07-13/' }
 ];
 
-var TOOLS = [
+var ASSETS = [
   { kind: 'Interactive', title: 'AI Ad Platform Comparison',
-    summary: 'Hypesonic vs. 7 competitors, capability by capability — with head-to-head views.',
-    href: 'tools/comparison.html' },
+    href: 'tools/comparison.html' }
+];
+
+var TOOLS = [
   { kind: 'Spreadsheet', title: 'Behavior Cookbook',
-    summary: 'Weekly activity grid and monthly radar. Your permanent record.',
     href: 'sessions/2026-07-13/Ananya_Cookbook.xlsx' },
   { kind: 'Spreadsheet', title: 'ZoomInfo Prospect List',
-    summary: '177 contacts at 133 ecom brands running 40+ Meta ads. Verified emails.',
     href: 'sessions/2026-07-13/Ananya_ZoomInfo_List_July2026.xlsx' }
 ];
 
@@ -185,28 +222,39 @@ var TOOLS = [
   var html = '';
   SESSIONS.forEach(function(s){
     html += '<a class="card" href="'+s.href+'">'
-          + '<span class="date">'+s.date+'</span>'
-          + '<span class="body"><span class="title">'+s.title+'</span>'
-          + '<span class="summary" style="display:block">'+s.summary+'</span></span>'
+          + '<span class="body"><span class="title">'+s.title+'</span></span>'
           + '<span class="arrow">&rarr;</span></a>';
   });
   html += '<a class="card next" href="https://meetings.hubspot.com/dan210/30-mins" target="_blank" rel="noopener">'
-        + '<span class="date">Next</span>'
-        + '<span class="body"><span class="title">Book the next session</span>'
-        + '<span class="summary" style="display:block">Bring your Cookbook numbers and whatever happened — good or bad.</span></span>'
+        + '<span class="body"><span class="title">Book the next session</span></span>'
         + '<span class="arrow">&rarr;</span></a>';
   wrap.innerHTML = html;
-  document.getElementById('sessionCount').textContent = SESSIONS.length + (SESSIONS.length===1 ? ' session' : ' sessions');
 
-  var tw = document.getElementById('toolCards');
-  var th = '';
-  TOOLS.forEach(function(t){
-    th += '<a class="tool" href="'+t.href+'">'
-        + '<span class="kind">'+t.kind+'</span>'
-        + '<span class="title">'+t.title+'</span>'
-        + '<span class="summary">'+t.summary+'</span></a>';
-  });
-  tw.innerHTML = th;
+  function renderTiles(id, items){
+    var out = '';
+    items.forEach(function(t){
+      out += '<a class="tool" href="'+t.href+'">'
+           + '<span class="kind">'+t.kind+'</span>'
+           + '<span class="title">'+t.title+'</span></a>';
+    });
+    document.getElementById(id).innerHTML = out;
+  }
+  renderTiles('toolCards', TOOLS);
+  renderTiles('assetCards', ASSETS);
+
+  // hash router: #sessions / #tools / #assets show that section; anything else = home
+  var views = ['sessions','tools','assets'];
+  function route(){
+    var h = (location.hash || '').replace('#','');
+    var active = views.indexOf(h) > -1 ? h : null;
+    views.forEach(function(v){
+      document.getElementById('view-'+v).style.display = (v === active) ? 'block' : 'none';
+    });
+    document.body.classList.toggle('at-section', !!active);
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>

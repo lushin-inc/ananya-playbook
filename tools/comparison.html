@@ -59,7 +59,8 @@
   .select-wrap select{appearance:none;-webkit-appearance:none;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 42px 11px 16px;cursor:pointer;letter-spacing:-.01em;transition:border-color .15s ease,box-shadow .15s ease}
   .select-wrap select:hover{border-color:var(--muted-2)}
   .select-wrap select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-wash)}
-  .view-note{font-family:var(--font-mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
+  .view-note{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);letter-spacing:.02em}
+  .view-note strong{color:var(--ink);font-weight:600}
   .pill{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:10px;letter-spacing:.03em;padding:4px 9px;border-radius:20px;border:1px solid transparent;color:#6B7280;background:#F1F2F4;white-space:nowrap;font-weight:500}
   .pill.lim{color:#B4690E;background:#FBEFDD}
   .pill.gated{color:#6B7280;background:#F1F2F4}
@@ -287,7 +288,7 @@
       viewNote.textContent = '';
     } else {
       table.style.minWidth = '620px';
-      viewNote.textContent = "Only what Hypesonic has that " + names[parseInt(sel,10)] + " doesn't \u2014 " + shown + " of " + rows.length;
+      viewNote.innerHTML = 'Pain points when using <strong>' + names[parseInt(sel,10)] + '</strong> instead of <strong>Hypesonic</strong>.';
     }
   }
 
