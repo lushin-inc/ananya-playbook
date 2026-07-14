@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hypesonic — Sales Playbook</title>
+<meta name="description" content="Working sessions and tools from Hypesonic's sales coaching with Dan Faber, Lushin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F0F10;
+    --ink-2:#141518;
+    --paper:#FFFFFF;
+    --paper-2:#FAFBFC;
+    --line:#E7E8EA;
+    --muted:#63676F;
+    --muted-2:#9CA0A8;
+    --orange:#FF4A1C;
+    --orange-ink:#E23B0F;
+    --orange-wash:#FFF3EE;
+    --font-display:'Inter Tight',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+    --wrap:880px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.85);backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.03em}
+  .brand .dot{width:8px;height:8px;background:var(--orange);border-radius:2px;transform:rotate(45deg)}
+  .nav .with{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  /* hero */
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);display:inline-flex;align-items:center;gap:8px;margin-bottom:14px}
+  .eyebrow::before{content:"";width:14px;height:1px;background:var(--orange)}
+  h1{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4.5vw,44px);letter-spacing:-.03em;line-height:1.04}
+  .hero p{color:var(--muted);max-width:520px;margin-top:14px;font-size:16.5px}
+
+  /* north star */
+  .star{display:flex;gap:0;border:1px solid var(--line);border-radius:16px;margin-top:32px;overflow:hidden;background:#fff}
+  .star .cell{flex:1;padding:20px 24px;border-right:1px solid var(--line)}
+  .star .cell:last-child{border-right:0}
+  .star .k{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px}
+  .star .v{font-family:var(--font-display);font-weight:800;font-size:24px;letter-spacing:-.02em}
+  .star .v.orange{color:var(--orange)}
+  .star .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+
+  /* sections */
+  section{padding:56px 0 8px}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px}
+  h2{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.02em}
+  .sec-head .note{font-family:var(--font-mono);font-size:11.5px;color:var(--muted-2);letter-spacing:.04em}
+
+  /* session cards */
+  .cards{display:flex;flex-direction:column;gap:14px}
+  .card{display:flex;align-items:center;gap:20px;border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:#fff;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+  .card:hover{transform:translateY(-2px);border-color:var(--orange);box-shadow:0 18px 40px -30px rgba(255,74,28,.45)}
+  .card .date{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);min-width:92px}
+  .card .body{flex:1}
+  .card .title{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:-.01em}
+  .card .summary{font-size:14px;color:var(--muted);margin-top:3px}
+  .card .arrow{color:var(--orange);font-family:var(--font-display);font-weight:800;font-size:18px;transition:transform .16s ease}
+  .card:hover .arrow{transform:translateX(4px)}
+  .card.next{border-style:dashed;background:var(--paper-2)}
+  .card.next:hover{border-color:var(--orange)}
+  .card.next .title{color:var(--muted)}
+
+  /* tool grid */
+  .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .tool{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:#fff;transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;display:flex;flex-direction:column;gap:6px}
+  .tool:hover{transform:translateY(-2px);border-color:var(--orange);box-shadow:0 18px 40px -30px rgba(255,74,28,.45)}
+  .tool .kind{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+  .tool .title{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.01em}
+  .tool .summary{font-size:13.5px;color:var(--muted);flex:1}
+
+  footer{margin-top:72px;background:var(--ink-2);color:#fff;padding:40px 0}
+  .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer .brand{color:#fff}
+  footer .tag{font-size:13px;color:rgba(255,255,255,.5);font-family:var(--font-mono);letter-spacing:.02em}
+  footer a.mail{color:var(--orange)}
+
+  @media (max-width:640px){
+    .star{flex-direction:column}
+    .star .cell{border-right:0;border-bottom:1px solid var(--line)}
+    .star .cell:last-child{border-bottom:0}
+    .card{flex-wrap:wrap;gap:8px}
+    .card .date{min-width:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
+    <span class="with">Coaching w/ Dan Faber · Lushin</span>
+  </div>
+</nav>
+
+<main>
+  <header class="wrap hero">
+    <span class="eyebrow">Sales Playbook</span>
+    <h1>Everything from our sessions,<br>in one place.</h1>
+    <p>Each working session becomes a page here — the frameworks, the numbers, the tools. Open the latest one, do the work, come back with results.</p>
+
+    <div class="star">
+      <div class="cell">
+        <div class="k">The goal</div>
+        <div class="v orange">$1M ARR</div>
+        <div class="sub">$84K MRR · by mid-October</div>
+      </div>
+      <div class="cell">
+        <div class="k">Starting from</div>
+        <div class="v">~$250K ARR</div>
+        <div class="sub">built in 6 months</div>
+      </div>
+      <div class="cell">
+        <div class="k">The pace</div>
+        <div class="v">+$21K MRR</div>
+        <div class="sub">new, every month</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap">
+    <div class="sec-head">
+      <h2>Sessions</h2>
+      <span class="note" id="sessionCount"></span>
+    </div>
+    <div class="cards" id="sessionCards"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="sec-head">
+      <h2>Tools</h2>
+    </div>
+    <div class="tools" id="toolCards"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <a href="./" class="brand"><span class="dot"></span>HYPESONIC</a>
+    <span class="tag">Dan Faber · Lushin · <a class="mail" href="mailto:dan@lushin.com">dan@lushin.com</a></span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   TO ADD A NEW SESSION:
+   1. Make a new folder: sessions/YYYY-MM-DD/ with an index.html
+      (and any files it links to) inside it.
+   2. Add ONE line to the top of the SESSIONS list below.
+   That's it — the page renders the rest.
+   ============================================================ */
+var SESSIONS = [
+  { date: 'Jul 13, 2026',
+    title: 'The Plan — Growing Sales to $84K MRR',
+    summary: 'The math to $1M ARR, the three things in order, your talk track, and the Behavior Cookbook.',
+    href: 'sessions/2026-07-13/' }
+];
+
+var TOOLS = [
+  { kind: 'Interactive', title: 'AI Ad Platform Comparison',
+    summary: 'Hypesonic vs. 7 competitors, capability by capability — with head-to-head views.',
+    href: 'tools/comparison.html' },
+  { kind: 'Spreadsheet', title: 'Behavior Cookbook',
+    summary: 'Weekly activity grid and monthly radar. Your permanent record.',
+    href: 'sessions/2026-07-13/Ananya_Cookbook.xlsx' },
+  { kind: 'Spreadsheet', title: 'ZoomInfo Prospect List',
+    summary: '177 contacts at 133 ecom brands running 40+ Meta ads. Verified emails.',
+    href: 'sessions/2026-07-13/Ananya_ZoomInfo_List_July2026.xlsx' }
+];
+
+(function(){
+  var wrap = document.getElementById('sessionCards');
+  var html = '';
+  SESSIONS.forEach(function(s){
+    html += '<a class="card" href="'+s.href+'">'
+          + '<span class="date">'+s.date+'</span>'
+          + '<span class="body"><span class="title">'+s.title+'</span>'
+          + '<span class="summary" style="display:block">'+s.summary+'</span></span>'
+          + '<span class="arrow">&rarr;</span></a>';
+  });
+  html += '<a class="card next" href="https://meetings.hubspot.com/dan210/30-mins" target="_blank" rel="noopener">'
+        + '<span class="date">Next</span>'
+        + '<span class="body"><span class="title">Book the next session</span>'
+        + '<span class="summary" style="display:block">Bring your Cookbook numbers and whatever happened — good or bad.</span></span>'
+        + '<span class="arrow">&rarr;</span></a>';
+  wrap.innerHTML = html;
+  document.getElementById('sessionCount').textContent = SESSIONS.length + (SESSIONS.length===1 ? ' session' : ' sessions');
+
+  var tw = document.getElementById('toolCards');
+  var th = '';
+  TOOLS.forEach(function(t){
+    th += '<a class="tool" href="'+t.href+'">'
+        + '<span class="kind">'+t.kind+'</span>'
+        + '<span class="title">'+t.title+'</span>'
+        + '<span class="summary">'+t.summary+'</span></a>';
+  });
+  tw.innerHTML = th;
+})();
+</script>
+</body>
+</html>

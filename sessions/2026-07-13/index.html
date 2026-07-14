@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Plan — Growing Sales to $84K MRR ($1M ARR)</title>
+<style>
+  :root{
+    --ink:#111111;
+    --paper:#fbfaf8;
+    --accent:#ff4d00;        /* Hypesonic orange */
+    --accent-soft:#fff1ea;
+    --mark:#ffd9c4;          /* orange highlighter */
+    --rule:#e3ddd4;
+    --muted:#6b6b6b;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.55;}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 60px;}
+  mark{background:var(--mark);padding:1px 4px;}
+
+  /* header */
+  .brandbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
+  .brand{font-family:var(--sans);font-weight:800;font-size:15px;letter-spacing:.22em;text-transform:uppercase;}
+  .brand .dot{color:var(--accent);}
+  .brandbar .session{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+  h1{font-weight:700;font-size:clamp(20px,3.5vw,26px);line-height:1.25;letter-spacing:-.01em;margin-bottom:6px;color:#333;}
+  h1 .orange{color:var(--accent);}
+  .goal-line{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:14px;border-top:3px solid var(--ink);padding-top:10px;}
+  .goal-line strong{color:var(--ink);}
+
+  /* circuit accent */
+  .circuit{height:2px;background:linear-gradient(90deg,var(--accent) 0%,var(--accent) 40%,transparent 40%);position:relative;margin:6px 0 0;}
+  .circuit::after{content:"";position:absolute;left:40%;top:-3px;width:8px;height:8px;border:2px solid var(--accent);border-radius:50%;background:var(--paper);}
+
+  /* sections */
+  section{margin-top:46px;}
+  .rule-tag{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px;}
+  h2{font-weight:800;font-size:24px;line-height:1.2;letter-spacing:-.01em;margin-bottom:10px;}
+  p{margin-bottom:12px;}
+  ul,ol{margin:0 0 12px 22px;}
+  li{margin-bottom:6px;}
+
+  /* script box */
+  .script{border-left:4px solid var(--accent);background:var(--accent-soft);padding:16px 18px;margin:16px 0;}
+  .script .label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  .script p{font-style:italic;margin-bottom:10px;}
+  .script p:last-child{margin-bottom:0;}
+
+  /* don't box */
+  .dont{border-left:4px solid var(--ink);background:#f1efeb;padding:16px 18px;margin:16px 0;}
+  .dont .label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin-bottom:8px;}
+  .dont p{margin-bottom:8px;}
+  .dont p:last-child{margin-bottom:0;}
+
+  /* the 3-step spine */
+  .spine{margin:18px 0;}
+  .step{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--rule);}
+  .step:last-child{border-bottom:1px solid var(--rule);}
+  .step .num{font-weight:800;font-size:28px;color:var(--accent);line-height:1;min-width:34px;}
+  .step h3{font-size:17px;font-weight:700;margin-bottom:6px;}
+  .step ul{margin:0 0 0 18px;}
+  .step li{font-size:15px;margin-bottom:4px;}
+  .step li ul{margin:6px 0 0 18px;}
+  .step li ul li{font-size:14.5px;color:#444;list-style:circle;}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:8px 10px;border-bottom:2px solid var(--ink);}
+  td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
+  td.num-cell{font-family:var(--mono);white-space:nowrap;}
+  .tbl-scroll{overflow-x:auto;}
+
+  /* cookbook grid */
+  .cookbook input{width:52px;padding:5px 6px;border:1px solid var(--rule);background:#fff;font-family:var(--mono);font-size:14px;text-align:center;}
+  .cookbook input:focus{outline:2px solid var(--accent);border-color:var(--accent);}
+  .cookbook .tot{font-weight:bold;}
+  .cookbook tr.hit .tot{color:var(--accent);}
+
+  /* download cards */
+  .dl{display:flex;align-items:center;gap:14px;border:2px solid var(--ink);background:#fff;padding:14px 16px;margin:14px 0;text-decoration:none;color:var(--ink);transition:border-color .15s;}
+  .dl:hover{border-color:var(--accent);}
+  .dl .icon{font-size:22px;color:var(--accent);font-weight:800;font-family:var(--mono);}
+  .dl .meta{flex:1;}
+  .dl .meta strong{display:block;font-size:15.5px;}
+  .dl .meta span{font-family:var(--mono);font-size:12px;color:var(--muted);}
+  .dl .btn{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:#fff;padding:8px 14px;white-space:nowrap;}
+
+  /* checklist */
+  .check{margin-left:0;}
+  .check li{list-style:none;margin-bottom:10px;}
+  .check label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;}
+  .check input[type=checkbox]{width:19px;height:19px;min-width:19px;margin-top:2px;accent-color:var(--accent);cursor:pointer;}
+  .check li.done span{text-decoration:line-through;opacity:.45;}
+  a{color:var(--accent);}
+
+  /* recap */
+  .takeaway{background:var(--ink);color:var(--paper);padding:16px 18px;font-weight:700;font-size:17px;margin-top:16px;}
+  .takeaway mark{background:var(--accent);color:#fff;}
+
+  footer{margin-top:56px;border-top:3px solid var(--ink);padding-top:14px;font-family:var(--mono);font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  footer a{color:var(--accent);text-decoration:none;}
+  footer .tag{color:var(--muted);}
+
+  @media (max-width:420px){
+    body{font-size:15.5px;}
+    .step .num{font-size:24px;min-width:28px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brandbar">
+      <a href="../../" style="text-decoration:none;color:inherit"><div class="brand"><span style="color:var(--accent)">&larr;</span> Hypesonic<span class="dot">.</span> Playbook</div></a>
+      <div class="session">Session 7.13.26 · w/ Dan Faber</div>
+    </div>
+    <div class="eyebrow">Coaching Cheat Sheet — Ananya</div>
+    <h1>The plan &mdash; growing sales to <span class="orange">$84K MRR</span> ($1M ARR)</h1>
+    <div class="circuit"></div>
+    <div class="goal-line">THE MATH — Goal: <strong>$1M ARR in 3 months.</strong> You're at ~$250K. Gap: ~$750K ARR ÷ 12 = ~$62K MRR ÷ 3 months = <strong>+$21K new MRR per month.</strong></div>
+  </header>
+
+  <section>
+    <span class="rule-tag">Rule 1</span>
+    <h2>You're the salesperson for the next six months</h2>
+    <p>You can't manage a salesperson if you've never done what they do — you won't know if they're doing it well, and you won't be able to call them out when they're not. The self-serve pivot may reduce the sales motion later, but <mark>for the next six months, the account executive is you.</mark> Then hire.</p>
+  </section>
+
+  <section>
+    <span class="rule-tag">Rule 2</span>
+    <h2>Work the three things in order</h2>
+    <p>All of sales comes down to three things. The order matters — most people skip to #3 and wonder why nothing works.</p>
+    <div class="spine">
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Quality of prospect</h3>
+          <ul>
+            <li>Right <strong>companies</strong> → right <strong>people</strong> at those companies → clean <strong>list</strong>
+              <ul>
+                <li>Yours: ecom/Shopify brands running 40+ Meta ads</li>
+                <li>Reach the founder or head of marketing</li>
+                <li>Already done — 177 contacts across 133 companies, verified emails (download below)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Quality of message</h3>
+          <ul>
+            <li>Speak to specific pains they have, as it relates to what you sell</li>
+            <li>Every prospect is making one of two decisions: <em>do something vs. nothing</em>, or <em>pick Hypesonic vs. the other option</em></li>
+            <li>Yours is the second — speak to the pain of their current way (human creators, other tools, doing it themselves)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Quantity</h3>
+          <ul>
+            <li>Once 1 and 2 are right, it's just a numbers game</li>
+            <li>That's the Cookbook (Rule 4)</li>
+            <li>Like the cookie stencil — get it right once, then stamp out a bunch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="rule-tag">Rule 3</span>
+    <h2>Start your message with their pain</h2>
+    <p>Commercials start with the problem (the messy kitchen) before they ever show the product, because pain is what sticks in people's brains. Your outreach and your answer to "so what do you do?" should start the same way:</p>
+    <div class="script">
+      <div class="label">Talk track — when they ask what you do</div>
+      <p>"I run a company called Hypesonic. A lot of our customers, before they worked with us, said things like...</p>
+      <p>"After a few weeks our Ads stop working and we're right back where we started"</p>
+      <p>or....</p>
+      <p>"We spend a ton on creative half the time we're just guessing."</p>
+      <p>or lastly...</p>
+      <p>"By the time we get new ads made, tested, and approved..... it's too late...."</p>
+      <p>Based on those.... any reason to talk.... further?......"</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="rule-tag">Rule 4</span>
+    <h2>Cookbook: manage behavior, not results</h2>
+    <p>If you manage results, you're managing the past. <mark>If you manage behavior, you're managing the future.</mark> Pick activity types you'll actually do, commit to a weekly number, and hit it.</p>
+    <p>The documentary-crew test: only things a camera crew following you around could <em>see you do</em> count. Actions, not thoughts.</p>
+    <p>These are your committed numbers. Type your daily counts below — the totals track live. <mark>Week Total has to equal Week Req'd by Friday.</mark> Some days get eaten by ops; that's fine. The week still adds up.</p>
+    <div class="tbl-scroll">
+    <table class="cookbook" id="cookbookGrid">
+      <tr><th>Activity</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Total</th><th>Req'd</th></tr>
+      <tr data-req="100"><td>Emails</td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td class="tot num-cell">0</td><td class="num-cell">100</td></tr>
+      <tr data-req="100"><td>LinkedIn messages</td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td class="tot num-cell">0</td><td class="num-cell">100</td></tr>
+      <tr data-req="1"><td>Social media posts</td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td class="tot num-cell">0</td><td class="num-cell">1</td></tr>
+      <tr data-req="2"><td>Post ads</td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td><input inputmode="numeric"></td><td class="tot num-cell">0</td><td class="num-cell">2</td></tr>
+    </table>
+    </div>
+    <p style="font-size:14px;color:var(--muted);">This grid saves in your browser on this device. The spreadsheet below is the permanent record — copy your week into it, then reset and go again Monday.</p>
+    <a class="dl" href="Ananya_Cookbook.xlsx" download>
+      <span class="icon">[x]</span>
+      <span class="meta"><strong>Behavior Cookbook</strong><span>Excel · weekly grid + monthly radar</span></span>
+      <span class="btn">Download</span>
+    </a>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th>Scoreboard (monthly radar)</th><th>Target</th></tr>
+      <tr><td>New MRR added</td><td class="num-cell">$21,000 / mo</td></tr>
+      <tr><td>First-time conversations (people who reply)</td><td class="num-cell">10 / wk → 40 / mo</td></tr>
+      <tr><td>Demos or meetings (minimum)</td><td class="num-cell">2 / wk → 8 / mo</td></tr>
+    </table>
+    </div>
+    <p>Put your energy into the activities during the week, and check the scoreboard monthly to see if it's working.</p>
+  </section>
+
+  <section>
+    <span class="rule-tag">Rule 5</span>
+    <h2>Bias toward action</h2>
+    <p>Paul Lushin's line: <mark>"If you're asking <strong>how</strong>, you haven't bought the decision yet."</mark> Dan's first move out of the '09 recession was handing out 200 flyers for odd jobs — hyper-inefficient, but that one backyard job led to the restaurant job that paid off his debt in six months. Imperfect action produces the clue to the next action. Perfecting the recipe produces nothing.</p>
+    <p>Reagan and Sarah say you're insanely smart. That's the risk — smart people see every connection and over-complicate. Take the dumb action. Get it done.</p>
+  </section>
+
+  <div class="dont">
+    <div class="label">Don't do this</div>
+    <p><strong>Don't spend the week perfecting.</strong> No perfect copy, no perfect list, no waiting on final pricing. Send with what you have, then bring Dan the results — that's what you'll work on together next.</p>
+  </div>
+
+  <section>
+    <span class="rule-tag">Your list</span>
+    <h2>Your prospect list — 177 contacts</h2>
+    <p>Founders and heads of marketing at 133 companies, with verified emails on every row. Download it and work through it using the pain points from Rule 3.</p>
+    <a class="dl" href="Ananya_ZoomInfo_List_July2026.xlsx" download>
+      <span class="icon">[x]</span>
+      <span class="meta"><strong>ZoomInfo Prospect List — July 2026</strong><span>Excel · 177 contacts / 133 companies · emails, LinkedIn, mobile</span></span>
+      <span class="btn">Download</span>
+    </a>
+  </section>
+
+  <section>
+    <span class="rule-tag">Before next session</span>
+    <h2>Your checklist</h2>
+    <ul class="check" id="checklist">
+      <li><label><input type="checkbox"><span>Fill in the Cookbook — activities, weekly numbers, scoreboard</span></label></li>
+      <li><label><input type="checkbox"><span>Ask AI: "I'm outbounding a list of ~200 contact — how do I keep my emails (and email domain) out of spam?"</span></label></li>
+      <li><label><input type="checkbox"><span>Give the cookbook a shot, do something small, bring results back (no matter what they are, gotta start somewhere).</span></label></li>
+      <li><label><input type="checkbox"><span>Book next session from <a href="https://meetings.hubspot.com/dan210/30-mins" target="_blank" rel="noopener">Dan's calendar link</a></span></label></li>
+    </ul>
+  </section>
+
+  <section>
+    <span class="rule-tag">Recap</span>
+    <h2>Tying it all together</h2>
+    <ol>
+      <li>You're the salesperson for the next six months. Own it.</li>
+      <li>Prospects first: founders and heads of marketing at ecom brands running 40+ Meta ads. Your list is built.</li>
+      <li>Message second: open with their pain — chasing ads that die, guessing on creative, moving too slow.</li>
+      <li>Then volume: pick your activities, set weekly numbers, hit them every week.</li>
+      <li>Track the scoreboard: +$21K MRR, 10 conversations, 2 demos a week.</li>
+      <li>Do a real week of it, bring back results, adjust with Dan.</li>
+    </ol>
+    <div class="takeaway">If you remember nothing else: <mark>manage the behavior, not the result</mark> — and take action this week, even if it's imperfect.</div>
+  </section>
+
+  <footer>
+    <span>Dan Faber · Lushin · <a href="mailto:dan@lushin.com">dan@lushin.com</a></span>
+    <span class="tag">Made for brands, built for speed.</span>
+  </footer>
+
+</div>
+
+<script>
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+(function(){
+  var grid = document.getElementById('cookbookGrid');
+  var rows = grid.querySelectorAll('tr[data-req]');
+  rows.forEach(function(row, ri){
+    var inputs = row.querySelectorAll('input');
+    inputs.forEach(function(inp, ci){
+      var key = 'cb_'+ri+'_'+ci;
+      var saved = lsGet(key);
+      if(saved !== null) inp.value = saved;
+      inp.addEventListener('input', function(){
+        lsSet(key, inp.value);
+        recalc(row);
+      });
+    });
+    recalc(row);
+  });
+  function recalc(row){
+    var sum = 0;
+    row.querySelectorAll('input').forEach(function(i){ sum += parseInt(i.value,10)||0; });
+    row.querySelector('.tot').textContent = sum;
+    row.classList.toggle('hit', sum >= parseInt(row.dataset.req,10));
+  }
+})();
+
+(function(){
+  var items = document.querySelectorAll('#checklist li');
+  items.forEach(function(li, i){
+    var cb = li.querySelector('input[type=checkbox]');
+    if(lsGet('chk_'+i)==='1'){ cb.checked = true; li.classList.add('done'); }
+    cb.addEventListener('change', function(){
+      li.classList.toggle('done', cb.checked);
+      lsSet('chk_'+i, cb.checked ? '1':'0');
+    });
+  });
+})();
+</script>
+</body>
+</html>
